@@ -8,6 +8,9 @@ audio_dir = os.path.abspath(os.path.join(base_dir, "..", "audios"))
 
 audio_path = os.path.join(audio_dir, "mellotts.wav")
 
+if not os.path.exists(audio_dir):
+    os.makedirs(audio_dir)
+
 # 1. 모델/토크나이저 다운로드 및 불러오기
 model = VitsModel.from_pretrained("myshell-ai/MeloTTS-Korean")
 tokenizer = VitsTokenizer.from_pretrained("myshell-ai/MeloTTS-Korean")
