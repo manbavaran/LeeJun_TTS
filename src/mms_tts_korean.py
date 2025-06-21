@@ -17,10 +17,11 @@ tokenizer = VitsTokenizer.from_pretrained("facebook/mms-tts-kor")
 
 # 2. 텍스트 토크나이즈
 inputs = tokenizer("안녕하세요! 오늘 날씨 좋네요.", return_tensors="pt")
+inputs["input_ids"] = inputs["input_ids"].long()
 
 # 3. 음성 생성
 with torch.no_grad():
-    audio = model(**inputs).audio  # [batch, sample]
+    audio = model(**inputs).waveform  # [batch, sample]
 
 # 4. wav 파일로 저장 (16kHz)
 sf.write(audio_path, audio.cpu().numpy()[0], 16000)
